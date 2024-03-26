@@ -1,5 +1,9 @@
-export const Username = () => {
-    return (
-        <>C</>
-    )
+const Username = () => {
+  return (
+    <div>
+      username
+    </div>
+  )
 }
+
+export default Username
