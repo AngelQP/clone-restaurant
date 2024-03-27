@@ -11,7 +11,7 @@ const CartOverview = () => {
   return (
     <>
       {total > 0 && (
-        <div className="flex flex-col ">
+        <div className="flex flex-col max-sm:hidden">
           <div className="text-right text-xs opacity-50">Total</div>
           <div className="-mt-1 font-medium">{formatCurrency(total)}</div>
         </div>
