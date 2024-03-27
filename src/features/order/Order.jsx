@@ -1,17 +1,28 @@
 import OrderItem from "./OrderItem";
 
-import { useLoaderData } from "react-router-dom";
+import { useFetcher, useLoaderData } from "react-router-dom";
 import { getOrder } from "../../services/apiRestaurant";
 import {
   calcMinutesLeft,
   formatCurrency,
   formatDate,
 } from "../../utils/helpers";
+import UpdateOrder from "./UpdateOrder";
+import { useEffect } from "react";
 
 const Order = () => {
   const order = useLoaderData();
+  const fetcher = useFetcher();
 
-  // Everyone can search for all orders, so for privacy reasons we're gonna gonna exclude names or address, these are only for the restaurant staff
+  useEffect(
+    function () {
+      if (!fetcher.data && fetcher.state === "idle") fetcher.load("/menu");
+    },
+    [fetcher],
+  );
+
+  const isLoading = fetcher.state === "loading";
+
   const {
     id,
     status,
@@ -23,6 +34,63 @@ const Order = () => {
   } = order;
 
   const deliveryIn = calcMinutesLeft(estimatedDelivery);
+
+  if (isLoading)
+    return (
+      <>
+        <div className="flex items-center">
+          <div className="flex-shrink flex-grow">
+            <div className="mb-2.5 h-6 w-1/2 rounded-full bg-gray-300 "></div>
+            <div className="mb-6 h-2 w-2/3 rounded-full bg-gray-300 "></div>
+          </div>
+          <div className="flex-shrink flex-grow flex items-center gap-2 justify-end">
+            <div className="mb-2.5 h-8 w-24 rounded-lg bg-gray-300 "></div>
+            <div className="mb-2.5 h-8 w-24 rounded-lg bg-gray-300 "></div>
+          </div>
+        </div>
+        <div
+          role="status"
+          className="animate-pulse space-y-4 divide-y divide-gray-200 rounded border border-gray-200 p-4 shadow md:p-6 "
+        >
+          <div className="flex items-center justify-between">
+            <div>
+              <div className="mb-2.5 h-2.5 w-24 rounded-full bg-gray-300 "></div>
+              <div className="h-2 w-32 rounded-full bg-gray-200 "></div>
+            </div>
+            <div className="h-2.5 w-12 rounded-full bg-gray-300 "></div>
+          </div>
+          <div className="flex items-center justify-between pt-4">
+            <div>
+              <div className="mb-2.5 h-2.5 w-24 rounded-full bg-gray-300 "></div>
+              <div className="h-2 w-32 rounded-full bg-gray-200 "></div>
+            </div>
+            <div className="h-2.5 w-12 rounded-full bg-gray-300 "></div>
+          </div>
+          <div className="flex items-center justify-between pt-4">
+            <div>
+              <div className="mb-2.5 h-2.5 w-24 rounded-full bg-gray-300 "></div>
+              <div className="h-2 w-32 rounded-full bg-gray-200 "></div>
+            </div>
+            <div className="h-2.5 w-12 rounded-full bg-gray-300 "></div>
+          </div>
+          <div className="flex items-center justify-between pt-4">
+            <div>
+              <div className="mb-2.5 h-2.5 w-24 rounded-full bg-gray-300 "></div>
+              <div className="h-2 w-32 rounded-full bg-gray-200 "></div>
+            </div>
+            <div className="h-2.5 w-12 rounded-full bg-gray-300 "></div>
+          </div>
+          <div className="flex items-center justify-between pt-4">
+            <div>
+              <div className="mb-2.5 h-2.5 w-24 rounded-full bg-gray-300 "></div>
+              <div className="h-2 w-32 rounded-full bg-gray-200 "></div>
+            </div>
+            <div className="h-2.5 w-12 rounded-full bg-gray-300 "></div>
+          </div>
+          <span className="sr-only">Loading...</span>
+        </div>
+      </>
+    );
 
   return (
     <div className="space-y-8 px-4 py-6">
@@ -71,6 +139,8 @@ const Order = () => {
           To pay on delivery: {formatCurrency(orderPrice + priorityPrice)}
         </p>
       </div>
+
+      {!priority && <UpdateOrder order={order} />}
     </div>
   );
 };

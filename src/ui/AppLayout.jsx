@@ -12,7 +12,7 @@ const AppLayout = () => {
 
       <Header />
 
-      <main className="mx-auto max-w-screen-2xl p-4">
+      <main className="mx-auto max-w-screen-xl p-4">
         <Outlet />
       </main>
     </div>

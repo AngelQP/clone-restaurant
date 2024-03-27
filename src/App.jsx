@@ -8,6 +8,7 @@ import OrderError from "./features/order/OrderError.jsx";
 import CreateOrder, {
   action as createOrderAction,
 } from "./features/order/CreateOrder.jsx";
+import { action as updateOrderAction } from "./features/order/UpdateOrder";
 
 function App() {
   const router = createBrowserRouter([
@@ -36,7 +37,8 @@ function App() {
           path: "/order/:orderId",
           element: <Order />,
           loader: orderLoader,
-          errorElement: <OrderError />
+          errorElement: <OrderError />,
+          action: updateOrderAction,
         },
       ],
     },

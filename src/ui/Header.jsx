@@ -6,8 +6,8 @@ import Username from "../features/user/Username";
 
 const Header = () => {
   return (
-    <header className="mx-auto mb-4 flex max-w-screen-2xl items-center justify-between p-4">
-      <Link to="/menu" className="flex w-1/4 items-center gap-2">
+    <header className="mx-auto mb-4 flex max-w-screen-xl items-center justify-between p-4">
+      <Link to="/" className="flex w-1/4 items-center gap-2">
         <LuPizza className="h-8 w-8 text-orange-600" />
         <div>
           <h1 className="-mb-1 text-2xl font-bold">React-Restaurant</h1>
