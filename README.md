@@ -27,12 +27,12 @@ This repository contains a simple online menu built using React.js.
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/iamhosen/weather-app-react-legacy.git
+   git clone https://github.com/iamhosen/react-restaurant-app.git
 
 2. Navigate to the project directory:
    
    ```bash
-   cd weather-app-react-legacy
+   cd react-restaurant-app
 
 3. Install dependencies
 
@@ -50,7 +50,7 @@ This repository contains a simple online menu built using React.js.
 
 ## Credits
 
-This Weather App is developed by Hossein Amirhosseini.
+This Restaurant App is developed by Hossein Amirhosseini.
 
 ## License
 
