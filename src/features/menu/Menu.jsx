@@ -4,7 +4,6 @@ import { MenuItem } from "./MenuItem.jsx";
 
 const Menu = () => {
   const menu = useLoaderData();
-  console.log(menu);
 
   return (
     <div className="grid grid-cols-4 gap-4">
