@@ -1,9 +1,11 @@
-const Username = () => {
-  return (
-    <div>
-      username
-    </div>
-  )
-}
+import { useSelector } from "react-redux";
 
-export default Username
+const Username = () => {
+  const name = useSelector((state) => state.user.name);
+
+  if (!name) return null
+
+  return <p className="text-sm text-gray-400">Hey, {name}!</p>;
+};
+
+export default Username;

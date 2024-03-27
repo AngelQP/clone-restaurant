@@ -2,6 +2,7 @@ import { LuPizza } from "react-icons/lu";
 import { Link } from "react-router-dom";
 import CartOverview from "../features/cart/CartOverview";
 import SearchOrder from "../features/order/SearchOrder";
+import Username from "../features/user/Username";
 
 const Header = () => {
   return (
@@ -10,7 +11,7 @@ const Header = () => {
         <LuPizza className="h-8 w-8 text-orange-600" />
         <div>
           <h1 className="-mb-1 text-2xl font-bold">React-Restaurant</h1>
-          <p className="text-sm text-gray-400">Hey, Hossein!</p>
+          <Username />
         </div>
       </Link>
       <div className="w-1/2 text-center">
