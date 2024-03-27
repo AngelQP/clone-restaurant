@@ -1,10 +1,27 @@
 import { formatCurrency } from "../../utils/helpers.js";
+import { useSelector, useDispatch } from "react-redux";
+import { addItem, getCurrentQuantityById } from "../cart/cartSlice.js";
+import UpdateItemQuantity from "../cart/UpdateItemQuantity.jsx";
 
 export const MenuItem = ({ pizza }) => {
+  const dispatch = useDispatch();
+
   const { id, name, unitPrice, ingredients, soldOut, imageUrl } = pizza;
 
-  const isInCart = false;
+  const currentQuantity = useSelector(getCurrentQuantityById(id));
+  const isInCart = currentQuantity > 0;
 
+  const addToCart = () => {
+    const newItem = {
+      pizzaId: id,
+      name,
+      quantity: 1,
+      unitPrice,
+      totalPrice: unitPrice * 1,
+    };
+    dispatch(addItem(newItem));
+  };
+  
   return (
     <div className="rounded-lg bg-white p-2 text-center shadow transition-all hover:shadow-lg">
       <img
@@ -12,7 +29,7 @@ export const MenuItem = ({ pizza }) => {
         alt={name}
         className="mx-auto mb-2 w-24 rounded-full"
       />
-      <div>
+      <div className="mb-2">
         <h3 className="font-medium">{name}</h3>
 
         {soldOut ? (
@@ -27,19 +44,14 @@ export const MenuItem = ({ pizza }) => {
       </div>
 
       {isInCart && (
-        <div className="mt-2 flex items-center justify-center gap-2">
-          <button className="rounded-lg bg-gray-50 px-3 pb-1 pt-0.5 text-xl text-gray-600 transition-all hover:bg-gray-100">
-            -
-          </button>
-          <div className="mx-2">2</div>
-          <button className="rounded-lg bg-orange-400 px-3 pb-1 pt-0.5 text-xl text-white transition-all hover:bg-orange-500">
-            +
-          </button>
-        </div>
+        <UpdateItemQuantity pizzaId={id} quantity={currentQuantity} />
       )}
 
       {!soldOut && !isInCart && (
-        <button className="mt-2 w-full rounded bg-gray-50 py-1 text-gray-600 transition-all hover:bg-gray-100">
+        <button
+          className="mt-2 w-full rounded bg-gray-50 py-1 text-gray-600 transition-all hover:bg-gray-100"
+          onClick={addToCart}
+        >
           Add to Cart
         </button>
       )}
